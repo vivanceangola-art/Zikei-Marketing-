@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+<meta charset="UTF-8">
+<title>Marketing Zikei</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:Arial,sans-serif;background:#0f172a;color:white}
+
+/* ===== CAPA ===== */
+#capa{
+  position:fixed;
+  inset:0;
+  background:url("capa.png") center/cover no-repeat;
+  display:flex;
+  justify-content:flex-end;
+  padding:40px 20px;
+  animation:zoom 2s ease forwards;
+}
+#overlay{
+  position:absolute;inset:0;
+  background:linear-gradient(to top,rgba(0,0,0,.85),rgba(0,0,0,.2));
+}
+#capaConteudo{
+  position:relative;z-index:2;text-align:center;width:100%;
+  animation:subir 1.5s ease forwards;
+}
+#capa button{
+  background:#38bdf8;border:none;
+  padding:15px 40px;border-radius:40px;
+  font-size:18px;font-weight:bold;
+  animation:pulsar 1.5s infinite;
+}
+
+/* ===== CURSO ===== */
+#curso{display:none}
+header{background:#020617;padding:15px;text-align:center;font-size:20px}
+input{padding:12px;border-radius:20px;border:none;width:80%;max-width:280px}
+
+.progresso{
+  width:90%;height:14px;background:#020617;
+  margin:10px auto;border-radius:20px;
+}
+#barra{height:100%;width:0%;background:#38bdf8;border-radius:20px}
+
+nav{display:flex;overflow-x:auto;background:#020617;padding:10px}
+nav button{
+  min-width:110px;background:#1e293b;
+  color:white;border:none;border-radius:20px;padding:10px;margin-right:10px
+}
+
+.aula{
+  display:none;background:#020617;
+  margin:15px;padding:20px;border-radius:20px
+}
+
+.btn{background:#38bdf8;border:none;padding:10px 20px;border-radius:20px;margin-top:10px}
+
+#certificado{
+  display:none;text-align:center;
+  background:white;color:black;
+  margin:15px;padding:30px;border-radius:20px
+}
+
+/* ===== ANIMAÇÕES ===== */
+@keyframes zoom{from{transform:scale(1.15)}to{transform:scale(1)}}
+@keyframes subir{from{transform:translateY(40px);opacity:0}to{opacity:1}}
+@keyframes pulsar{
+  0%{box-shadow:0 0 0 0 rgba(56,189,248,.6)}
+  70%{box-shadow:0 0 0 25px rgba(56,189,248,0)}
+  100%{box-shadow:0 0 0 0 rgba(56,189,248,0)}
+}
+
+/* PDF */
+@media print{
+  body *{visibility:hidden}
+  #certificado,#certificado *{visibility:visible}
+  #certificado{position:absolute;inset:0}
+}
+</style>
+</head>
+
+<body>
+
+<!-- ===== CAPA ===== -->
+<div id="capa">
+  <div id="overlay"></div>
+  <div id="capaConteudo">
+    <h2>Marketing Digital do Zero</h2>
+    <p>O segredo que todos querem aprender</p>
+    <button onclick="mostrarNome()">Começar Curso</button>
+  </div>
+</div>
+
+<!-- ===== CURSO ===== -->
+<div id="curso">
+
+<header>Marketing Zikei</header>
+
+<div style="text-align:center;padding:15px" id="nomeBox">
+  <input id="nome" placeholder="Digite seu nome">
+  <br><br>
+  <button class="btn" onclick="entrarCurso()">Entrar</button>
+</div>
+
+<div class="progresso"><div id="barra"></div></div>
+<p id="status" style="text-align:center"></p>
+
+<nav>
+  <button onclick="mostrar(1)">Aula 1</button>
+  <button onclick="mostrar(2)">Aula 2</button>
+  <button onclick="mostrar(3)">Aula 3</button>
+  <button onclick="mostrar(4)">Aula 4</button>
+  <button onclick="mostrar(5)">Aula 5</button>
+  <button onclick="mostrar(6)">Aula 6</button>
+  <button onclick="mostrar(7)">Aula 7</button>
+  <button onclick="mostrar(8)">Final</button>
+</nav>
+
+<!-- AULAS -->
+<div class="aula" id="a1"><h2>O que é Marketing Digital</h2><p>Uso da internet para divulgar marcas.</p><button class="btn" onclick="concluir(1)">Concluir</button></div>
+
+<div class="aula" id="a2">
+<h2>Tipos de Marketing Digital</h2>
+<p><b>Exercício:</b> Qual é digital?</p>
+<button class="btn" onclick="responder(true)">Marketing de Conteúdo</button>
+<button class="btn" onclick="responder(false)">Marketing de Rua</button>
+<br><button class="btn" onclick="concluir(2)">Concluir</button>
+</div>
+
+<div class="aula" id="a3"><h2>Instagram & Facebook</h2><button class="btn" onclick="concluir(3)">Concluir</button></div>
+<div class="aula" id="a4"><h2>TikTok & YouTube</h2><button class="btn" onclick="concluir(4)">Concluir</button></div>
+<div class="aula" id="a5"><h2>Conteúdo</h2><button class="btn" onclick="concluir(5)">Concluir</button></div>
+<div class="aula" id="a6"><h2>Ferramentas</h2><button class="btn" onclick="concluir(6)">Concluir</button></div>
+<div class="aula" id="a7"><h2>Vendas</h2><button class="btn" onclick="concluir(7)">Concluir</button></div>
+
+<div class="aula" id="a8">
+<h2>Curso Concluído</h2>
+<button class="btn" onclick="finalizar()">Gerar Certificado</button>
+</div>
+
+<!-- CERTIFICADO -->
+<div id="certificado">
+<h1>CERTIFICADO</h1>
+<p>Certificamos que</p>
+<h2 id="nomeAluno"></h2>
+<p>concluiu o curso <b>Marketing Zikei</b></p>
+<p>Data: <span id="data"></span></p>
+<button class="btn" onclick="window.print()">📄 Baixar PDF</button>
+</div>
+
+</div>
+
+<script>
+let total=7;
+let prog=JSON.parse(localStorage.getItem("prog"))||[];
+
+function mostrarNome(){
+ document.getElementById("capa").style.display="none";
+ document.getElementById("curso").style.display="block";
+}
+
+function entrarCurso(){
+ let n=document.getElementById("nome").value;
+ if(!n) return alert("Digite seu nome");
+ localStorage.setItem("aluno",n);
+ atualizar();
+}
+
+function mostrar(n){
+ document.querySelectorAll(".aula").forEach(a=>a.style.display="none");
+ document.getElementById("a"+n).style.display="block";
+}
+
+function concluir(n){
+ if(!prog.includes(n)){
+  prog.push(n);
+  localStorage.setItem("prog",JSON.stringify(prog));
+  atualizar();
+ }
+}
+
+function atualizar(){
+ let p=Math.round((prog.length/total)*100);
+ document.getElementById("barra").style.width=p+"%";
+ document.getElementById("status").innerText="Progresso: "+p+"%";
+}
+
+function responder(c){alert(c?"Correto ✅":"Errado ❌")}
+
+function finalizar(){
+ if(prog.length<total) return alert("Conclua todas as aulas");
+ document.getElementById("nomeAluno").innerText=localStorage.getItem("aluno");
+ document.getElementById("data").innerText=new Date().toLocaleDateString();
+ document.getElementById("certificado").style.display="block";
+}
+</script>
+
+</body>
+</html>
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+<meta charset="UTF-8">
+<title>Marketing Zikei</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+body{
+  margin:0;
+  font-family: Arial, sans-serif;
+  background:#0f172a;
+  color:white;
+}
+
+.centro{
+  text-align:center;
+  padding:40px 20px;
+}
+
+header{
+  background:#020617;
+  padding:15px;
+  text-align:center;
+  font-size:20px;
+}
+
+nav{
+  display:flex;
+  overflow-x:auto;
+  background:#020617;
+}
+
+nav button{
+  min-width:110px;
+  border:none;
+  background:#38bdf8;
+  margin:8px;
+  padding:10px;
+  border-radius:20px;
+  font-weight:bold;
+}
+
+.aula{
+  display:none;
+  padding:20px;
+}
+
+input{
+  padding:10px;
+  width:80%;
+  max-width:300px;
+  border-radius:10px;
+  border:none;
+}
+
+button{
+  cursor:pointer;
+}
+
+.progresso{
+  width:90%;
+  height:14px;
+  background:#020617;
+  margin:10px auto;
+  border-radius:10px;
+}
+
+#barra{
+  height:100%;
+  width:0%;
+  background:#38bdf8;
+  border-radius:10px;
+}
+
+#certificado{
+  display:none;
+}
+</style>
+</head>
+
+<body>
+
+<!-- CAPA -->
+<div id="capa" class="centro">
+  <h1>📘 Marketing Zikei</h1>
+  <p>Livro de Estudo em Marketing Digital</p>
+
+  <input id="nome" placeholder="Digite seu nome">
+  <br><br>
+  <button onclick="entrar()">Começar Curso</button>
+</div>
+
+<!-- CURSO -->
+<div id="curso" style="display:none">
+
+<header>Marketing Zikei</header>
+
+<div class="progresso">
+  <div id="barra"></div>
+</div>
+<p id="status" style="text-align:center"></p>
+
+<nav>
+  <button onclick="mostrar(1)">Aula 1</button>
+  <button onclick="mostrar(2)">Aula 2</button>
+  <button onclick="mostrar(3)">Aula 3</button>
+  <button onclick="mostrar(4)">Aula 4</button>
+  <button onclick="mostrar(5)">Aula 5</button>
+  <button onclick="mostrar(6)">Aula 6</button>
+  <button onclick="mostrar(7)">Aula 7</button>
+  <button onclick="mostrar(8)">Aula 8</button>
+</nav>
+
+<!-- AULAS -->
+
+<div class="aula" id="a1">
+<h2>Aula 1 – O que é Marketing Digital</h2>
+<p>
+Marketing Digital é o uso da internet para divulgar marcas, produtos,
+serviços ou projetos pessoais, criando relacionamento com o público.
+</p>
+<button onclick="concluir(1)">Concluir Aula</button>
+</div>
+
+<div class="aula" id="a2">
+<h2>Aula 2 – Tipos de Marketing Digital</h2>
+<ul>
+<li>Marketing de Conteúdo</li>
+<li>Marketing nas Redes Sociais</li>
+<li>Publicidade Online</li>
+<li>Branding</li>
+</ul>
+
+<p><strong>Exercício:</strong> Qual é um tipo de marketing digital?</p>
+<button onclick="responder(true)">Marketing de Conteúdo</button>
+<button onclick="responder(false)">Marketing de Rua</button>
+<br><br>
+<button onclick="concluir(2)">Concluir Aula</button>
+</div>
+
+<div class="aula" id="a3">
+<h2>Aula 3 – Instagram e Facebook</h2>
+<p>
+Criação de perfil profissional, bio correta, tipos de posts e frequência.
+</p>
+<button onclick="concluir(3)">Concluir Aula</button>
+</div>
+
+<div class="aula" id="a4">
+<h2>Aula 4 – TikTok e YouTube</h2>
+<p>
+Como funciona o algoritmo, hashtags, tendências e erros comuns.
+</p>
+<button onclick="concluir(4)">Concluir Aula</button>
+</div>
+
+<div class="aula" id="a5">
+<h2>Aula 5 – Conteúdo que chama atenção</h2>
+<p>
+Conteúdo educativo, entretenimento, vendas e storytelling.
+</p>
+<button onclick="concluir(5)">Concluir Aula</button>
+</div>
+
+<div class="aula" id="a6">
+<h2>Aula 6 – Ferramentas Digitais</h2>
+<ul>
+<li>Canva</li>
+<li>CapCut</li>
+<li>WhatsApp Business</li>
+<li>Google Drive</li>
+</ul>
+<button onclick="concluir(6)">Concluir Aula</button>
+</div>
+
+<div class="aula" id="a7">
+<h2>Aula 7 – Divulgação e Vendas Online</h2>
+<p>
+Funil de vendas, atendimento ao cliente e erros comuns.
+</p>
+<button onclick="concluir(7)">Concluir Aula</button>
+</div>
+
+<div class="aula" id="a8">
+<h2>Aula 8 – Monetização e Plano Final</h2>
+<p>
+Como ganhar dinheiro com marketing digital e criar um plano simples.
+</p>
+
+<button onclick="concluir(8)">Concluir Aula</button>
+<br><br>
+<button onclick="finalizar()">Finalizar Curso</button>
+</div>
+
+<!-- CERTIFICADO -->
+<div id="certificado" class="centro">
+<h1>🎓 CERTIFICADO</h1>
+<p>Certificamos que</p>
+<h2 id="nomeAluno"></h2>
+<p>Concluiu com sucesso o curso</p>
+<h3>Marketing Zikei – Marketing Digital</h3>
+</div>
+
+</div>
+
+<script>
+let totalAulas = 8;
+let progresso = JSON.parse(localStorage.getItem("progresso")) || [];
+
+function entrar(){
+  let nome = document.getElementById("nome").value;
+  if(nome === ""){
+    alert("Digite seu nome");
+    return;
+  }
+  localStorage.setItem("aluno", nome);
+  document.getElementById("capa").style.display="none";
+  document.getElementById("curso").style.display="block";
+  atualizar();
+}
+
+function mostrar(n){
+  document.querySelectorAll(".aula").forEach(a=>a.style.display="none");
+  document.getElementById("a"+n).style.display="block";
+}
+
+function concluir(n){
+  if(!progresso.includes(n)){
+    progresso.push(n);
+    localStorage.setItem("progresso", JSON.stringify(progresso));
+    atualizar();
+    alert("Aula concluída ✅");
+  }
+}
+
+function atualizar(){
+  let percent = Math.round((progresso.length/totalAulas)*100);
+  document.getElementById("barra").style.width = percent+"%";
+  document.getElementById("status").innerText = "Progresso: "+percent+"%";
+}
+
+function responder(correta){
+  alert(correta ? "Resposta correta ✅" : "Resposta errada ❌");
+}
+
+function finalizar(){
+  if(progresso.length < totalAulas){
+    alert("Conclua todas as aulas primeiro");
+    return;
+  }
+  let nome = localStorage.getItem("aluno");
+  document.getElementById("nomeAluno").innerText = nome;
+  document.getElementById("certificado").style.display="block";
+  alert("Curso concluído 🎉 Certificado liberado!");
+}
+</script>
+
+</body>
+</html>
